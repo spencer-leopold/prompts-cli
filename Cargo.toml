@@ -1,0 +1,14 @@
+[package]
+name = "prompts"
+version = "0.0.1"
+authors = ["Spencer Leopold <spencer.leopold@gmail.com>"]
+homepage = "https://github.com/spencer-leopold/prompts-cli"
+repository = "https://github.com/spencer-leopold/prompts-cli"
+documentation = "https://doc.spencer-leopold.org/prompts-cli"
+description = """
+Utility for create command line UIs
+"""
+
+[dependencies]
+
+rustc-serialize = "0.3.16"
