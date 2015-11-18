@@ -36,25 +36,13 @@ extern {
 
 fn read_stdin() -> ReadResult {
     unsafe {
-        // Reading bytes into storage for an unsigned integer for easy comparison of
-        // input byte sequence (we only care about arrow keys) to integer constants
         //
-        // At least for Konsole, pressing Up, Down, Right, or Left on the keyboard sends 3 bytes:
-        // 0x1B (escape)
-        // 0x5B [
-        // 0x41, 0x42, 0x43, or 0x44 (A, B, C, or D)
+        // Reading bytes into storage for an unsigned integer
         //
-        // Note the case where we read less than all 3 bytes from the single read call is not handled,
-        // and considered "Other"
-        //
-        // For example, 0x1B 0x5B, 0x44 is sent when Left is pressed
-        // 
-        // The integer constants to compare these sequences to are "backwards" due to Intel's least significant
-        // byte order, so 0x445B1B is the constant we expect when left is pressed
         let mut buf = 0u64;
         let bufAddr: *mut u8 = transmute(&mut buf);
 
-        // first parameter is file descriptor number, 0 ==> standard input
+        // first parameter is file descriptor number
         let numRead = read(0, bufAddr, 8);
 
         if numRead < 0 {
